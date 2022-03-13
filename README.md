@@ -1,4 +1,3 @@
-# MeanScout_4198
+# VileScout
 
-Fork of Aidunlin's MeanScout. See https://github.com/Aidunlin/MeanScout.  
-This fork will stay on HTML and will not adopt any upstream code for the forseeable future.
+Fork of Aidunlin's MeanScout, but for pit scouting instead of match scouting.
