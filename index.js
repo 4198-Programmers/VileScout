@@ -13,7 +13,6 @@ const surveysDownloadButton = document.querySelector("#surveys-download-btn");
 const surveysEraseButton = document.querySelector("#surveys-erase-btn");
 const teamMetric = document.querySelector("#metric-team");
 const teamMetricList = document.querySelector("#teams-list");
-const matchMetric = document.querySelector("#metric-match");
 const absentMetric = document.querySelector("#metric-absent");
 const customMetricsDiv = document.querySelector("#metrics-custom");
 const surveySaveButton = document.querySelector("#survey-save-btn");
@@ -26,13 +25,11 @@ templateEditButton.onclick = () => editTemplate();
 surveysDownloadButton.onclick = () => downloadSurveys();
 surveysEraseButton.onclick = () => eraseSurveys();
 teamMetric.oninput = () => backupSurvey();
-matchMetric.oninput = () => backupSurvey();
 absentMetric.onclick = () => toggleAbsent();
 surveySaveButton.onclick = () => saveSurvey();
 surveyResetButton.onclick = () => resetSurvey();
 
-let scoutLocation = "Red Near";
-let matchCount = 1;
+let scoutLocation = "Pit Scouting - Team 1";
 let isAbsent = false;
 let gameMetrics = [];
 
@@ -60,38 +57,19 @@ const metricTypes = {
 
 const infiniteRechargeSurvey = {
   "metrics": [
-    { "name": "Team left tarmac?", "type": "toggle", "group": "Auto (Qualitative)" },
-    { "name": "Team collected balls?", "type": "toggle"},
-
-    { "name": "Top", "type": "number", "group": "Auto (Balls)"},
-    { "name": "Bottom", "type": "number" },
-    { "name": "Missed", "type": "number" },
-
-    { "name": "Top", "type": "number", "group": "Teleop (Balls)" },
-    { "name": "Bottom", "type": "number" },
-    { "name": "Missed", "type": "number" },
-
-    { "name": "Safe area usage:", "type": "select", "values": ["None", "A Little", "A Lot"], "group": "Teleop (Qualitative)" },
-    { "name": "Defence played:", "type": "select", "values": ["None", "A Little", "A Lot"] },
-
-    { "name": "Bar number reached (0 for none)", "type": "select", "values": ["0", "1", "2", "3", "4"], "group": "Endgame (Climb)" },
-    { "name": "Team attempts climbs?", "type": "toggle" },
-
-    { "name": "Extra Notes", "type": "text", "tip": "Enter extra data here...", "group": "Notes" },
-    { "name": "Drive Team Rating", "type": "text", "tip": "Enter driver data here...", "group": "Notes" }]
+    { "name": "Full Team Name", "type": "text", "tip": "Enter team name here...", "group": "Team Information" },
+    { "name": "Team Location", "type": "text", "tip": "Enter town here..." }]
 };
 
 const exampleTemplate = infiniteRechargeSurvey;
 
 let currentTemplate = JSON.parse(localStorage.template ?? JSON.stringify(exampleTemplate));
 loadTemplate(currentTemplate);
-setLocation(localStorage.location ?? "Red Near");
+setLocation(localStorage.location ?? "Pit Scouting - Team 1");
 
 if (localStorage.backup) {
   const backup = JSON.parse(localStorage.backup);
   teamMetric.value = backup.find(metric => metric.name == "Team").value;
-  matchCount = backup.find(metric => metric.name == "Match").value;
-  matchMetric.value = matchCount;
   isAbsent = backup.find(metric => metric.name == "Absent").value;
   if (isAbsent) {
     absentMetric.innerHTML = "<i class='square-checked text-icon'></i>Absent";
@@ -107,7 +85,6 @@ if (localStorage.backup) {
 function backupSurvey() {
   localStorage.backup = JSON.stringify([
     { name: "Team", value: teamMetric.value },
-    { name: "Match", value: matchMetric.value },
     { name: "Absent", value: isAbsent },
     ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
   ]);
@@ -207,11 +184,11 @@ function loadTemplate(newTemplate = exampleTemplate) {
  * Sets a new scout location
  * @param {string} newLocation A string that includes alliance color and robot position
  */
-function setLocation(newLocation = "Red Near") {
+function setLocation(newLocation = "Pit Scouting - Team 1") {
   scoutLocation = newLocation;
-  let newTheme = "red";
-  if (/blue/.test(newLocation.toLowerCase())) newTheme = "blue";
-  document.documentElement.style.setProperty("--theme-color", `var(--${newTheme})`);
+  /*let newTheme = "red";
+  if (/blue/.test(newLocation.toLowerCase())) newTheme = "blue";*/
+  document.documentElement.style.setProperty("--theme-color", `var(--${"purple"})`);
   localStorage.location = newLocation;
   locationText.innerHTML = newLocation;
   locationSelect.value = newLocation;
@@ -233,17 +210,16 @@ function saveSurvey() {
       return;
     }
   }
-  // Matches a 1-3 long sequence of numbers
+/*  // Matches a 1-3 long sequence of numbers
   if (!/\d{1,3}/.test(matchMetric.value)) {
     alert("Invalid match value");
     matchMetric.focus();
     return;
-  }
+  }*/
   if (!confirm("Confirm save?")) return;
   let surveys = JSON.parse(localStorage.surveys ?? "[]");
   surveys.push([
     { name: "Team", value: teamMetric.value },
-    { name: "Match", value: matchMetric.value },
     { name: "Absent", value: isAbsent },
     ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
   ]);
@@ -259,10 +235,10 @@ function resetSurvey(askUser = true) {
   if (askUser) if (prompt("Type 'reset' to reset the survey") != "reset") return;
   teamMetric.value = "";
   teamMetric.focus();
-  if (!askUser) {
+/*  if (!askUser) {
     matchCount = parseInt(matchMetric.value) + 1;
     matchMetric.value = matchCount;
-  }
+  }*/
   if (isAbsent) toggleAbsent();
   gameMetrics.forEach(metric => metric.reset());
   refreshIcons();

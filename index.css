@@ -12,7 +12,8 @@
   color-scheme: dark light;
   --red: #f44336;
   --blue: #2196f3;
-  --theme-color: var(--red);
+  --purple: #6e04aa;
+  --theme-color: var(--purple);
   --main-color: #fff;
   --fg-color: rgba(127, 127, 127, 0.2);
   --bg-color: #000;

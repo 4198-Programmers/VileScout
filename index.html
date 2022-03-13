@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Scouting form for RoboCats 4198 based on MeanScout by Aidunlin.">
   <!-- Open Graph Protocol, used as a preview in Discord, Slack, etc. -->
-  <meta property="og:title" content="RoboCats Scouting Form">
+  <meta property="og:title" content="RoboCats Pit Scouting Form">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jjmelancon.github.io/MeanScout_4198/">
   <meta property="og:image" content="https://jjmelancon.github.io/MeanScout_4198/logo.png">
@@ -29,12 +29,12 @@
     <div class="flex spaced">
       <div>Location
         <select id="location-select">
-          <option class="red">Red Near</option>
-          <option class="red">Red Mid</option>
-          <option class="red">Red Far</option>
-          <option class="blue">Blue Near</option>
-          <option class="blue">Blue Mid</option>
-          <option class="blue">Blue Far</option>
+          <option class="red">Pit Scouting - Team 1</option>
+          <option class="red">Pit Scouting - Team 2</option>
+          <option class="red">Pit Scouting - Team 3</option>
+          <option class="blue">Pit Scouting - Team 4</option>
+          <option class="blue">Pit Scouting - Team 5</option>
+          <option class="blue">Pit Scouting - Team 6</option>
         </select>
       </div>
       <div>Template
@@ -62,9 +62,6 @@
       <div>Team
         <input id="metric-team" list="teams" autofocus maxlength="5">
         <datalist id="teams-list"></datalist>
-      </div>
-      <div>Match
-        <input id="metric-match" type="number" value="1" pattern="[0-9]*">
       </div>
       <div>
         <button id="metric-absent"><i class="square-empty text-icon"></i>Absent</button>
