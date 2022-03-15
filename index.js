@@ -3,9 +3,9 @@ if ("serviceWorker" in navigator) {
 }
 
 const menuToggleButton = document.querySelector("#menu-toggle-btn");
-const locationText = document.querySelector("#location-text");
+const locationText = document.querySelector("#crew-text");
 const menuDiv = document.querySelector("#menu");
-const locationSelect = document.querySelector("#location-select");
+const locationSelect = document.querySelector("#crew-select");
 const templateCopyButton = document.querySelector("#template-copy-btn");
 const templateEditButton = document.querySelector("#template-edit-btn");
 const downloadSelect = document.querySelector("#download-type-sel");
@@ -29,7 +29,7 @@ absentMetric.onclick = () => toggleAbsent();
 surveySaveButton.onclick = () => saveSurvey();
 surveyResetButton.onclick = () => resetSurvey();
 
-let scoutLocation = "Team 1";
+let scoutLocation = "Crew 1";
 let isAbsent = false;
 let gameMetrics = [];
 
@@ -65,7 +65,7 @@ const exampleTemplate = infiniteRechargeSurvey;
 
 let currentTemplate = JSON.parse(localStorage.template ?? JSON.stringify(exampleTemplate));
 loadTemplate(currentTemplate);
-setLocation(localStorage.location ?? "Team 1");
+setLocation(localStorage.location ?? "Crew 1");
 
 if (localStorage.backup) {
   const backup = JSON.parse(localStorage.backup);
@@ -184,7 +184,7 @@ function loadTemplate(newTemplate = exampleTemplate) {
  * Sets a new scout location
  * @param {string} newLocation A string that includes alliance color and robot position
  */
-function setLocation(newLocation = "Team 1") {
+function setLocation(newLocation = "Crew 1") {
   scoutLocation = newLocation;
   /*let newTheme = "red";
   if (/blue/.test(newLocation.toLowerCase())) newTheme = "blue";*/
