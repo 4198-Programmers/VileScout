@@ -29,7 +29,7 @@ absentMetric.onclick = () => toggleAbsent();
 surveySaveButton.onclick = () => saveSurvey();
 surveyResetButton.onclick = () => resetSurvey();
 
-let scoutLocation = "Pit Scouting - Team 1";
+let scoutLocation = "Team 1";
 let isAbsent = false;
 let gameMetrics = [];
 
@@ -65,7 +65,7 @@ const exampleTemplate = infiniteRechargeSurvey;
 
 let currentTemplate = JSON.parse(localStorage.template ?? JSON.stringify(exampleTemplate));
 loadTemplate(currentTemplate);
-setLocation(localStorage.location ?? "Pit Scouting - Team 1");
+setLocation(localStorage.location ?? "Team 1");
 
 if (localStorage.backup) {
   const backup = JSON.parse(localStorage.backup);
@@ -184,7 +184,7 @@ function loadTemplate(newTemplate = exampleTemplate) {
  * Sets a new scout location
  * @param {string} newLocation A string that includes alliance color and robot position
  */
-function setLocation(newLocation = "Pit Scouting - Team 1") {
+function setLocation(newLocation = "Team 1") {
   scoutLocation = newLocation;
   /*let newTheme = "red";
   if (/blue/.test(newLocation.toLowerCase())) newTheme = "blue";*/
