@@ -10,8 +10,8 @@
 /* `--theme-color` will change based on the selected location */
 :root {
   color-scheme: dark light;
-  --red: #f44336;
-  --blue: #2196f3;
+  --red: #6e04aa;
+  --blue: #6e04aa;
   --purple: #6e04aa;
   --theme-color: var(--purple);
   --main-color: #fff;
