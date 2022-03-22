@@ -1,10 +1,10 @@
 {
-  "name": "RoboCats Scouting Form",
-  "short_name": "RoboScout",
-  "description": "Scouting form for RoboCats 4198 based on MeanScout by Aidunlin.",
+  "name": "VileScout - RoboCats Scouting Form",
+  "short_name": "VileScout - Pit Scouting",
+  "description": "Pit Scouting form for RoboCats 4198 based on MeanScout by Aidunlin.",
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#6e04aa",
   "background_color": "#000000",
   "icons": [{
     "src": "./logo.png",
