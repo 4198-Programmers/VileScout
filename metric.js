@@ -68,6 +68,33 @@ class NumberMetric {
   }
 }
 
+
+/** HOW DO I PROGRAM JAVASCRIPT :( */
+class FloatMetric {
+  constructor(metric = { name: "Float" }) {
+    this.name = metric.name;
+    this.value = 0;
+    this.element = document.createElement("div");
+    this.element.innerHTML = this.name + "<br>";
+    this.element.style.width = "30%";
+    this.input = document.createElement("input");
+    this.input.oninput = () => {
+      this.update();
+      backupSurvey();
+    };
+    this.element.append(this.input);
+  }
+
+  update(newValue = this.input.value.replace('"', "'")) {
+    this.value = newValue;
+    this.input.value = newValue;
+  }
+
+  reset() {
+    this.update("");
+  }
+}
+
 /**
  * A dropdown selector. Value is a string (selected option).
  * There must be an array of string `values` to create options for the selector.

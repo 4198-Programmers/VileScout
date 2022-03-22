@@ -41,6 +41,7 @@ const metricTypes = {
   "text": TextMetric,
   "rating": RatingMetric,
   "timer": TimerMetric,
+  "float": FloatMetric,
 };
 
 // The example template showcases each metric type
@@ -58,7 +59,32 @@ const metricTypes = {
 const infiniteRechargeSurvey = {
   "metrics": [
     { "name": "Full Team Name", "type": "text", "tip": "Enter team name here...", "group": "Team Information" },
-    { "name": "Team Location", "type": "text", "tip": "Enter town here..." }]
+    { "name": "Team Location", "type": "text", "tip": "Enter town here..." },
+    { "name": "Robot Name", "type": "text", "tip": "Enter name here..." },
+
+    { "name": "Drive Train Type", "type": "text", "tip": "Enter type here...", "group": "Robot Specs" },
+    { "name": "Motor Type", "type": "text", "tip": "Enter type here..." },
+    { "name": "Number of Wheels Used", "type": "number" },
+    { "name": "Ball Capacity", "type": "select", "values": ["0", "1", "2"] },
+    { "name": "Goal Height", "type": "select", "values": ["High and Low", "High", "Low", "None"] },
+    { "name": "Average Cycle Time (s)", "type": "float"},
+    { "name": "Ball Bounce Out Rate (%)", "type": "float"},
+    { "name": "Robot Weight (lbs)", "type": "float"},
+
+    { "name": "Can it Climb?", "type": "toggle", "group": "Engineered Capabilities" },
+    { "name": "Climb Level", "type": "select", "values": ["0", "1", "2", "3", "4"] },
+    { "name": "Total Climb Time (s)", "type": "float" },
+    { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none." },
+    { "name": "Where are 3D-Printed Parts Used?", "type": "text", "tip": "Type here. Leave blank for none." },
+
+    { "name": "Programmed Auto Capabilities?", "type": "text", "tip": "Type here. Leave blank for none.", "group": "Programmed Capabilities" },
+    { "name": "Limelight Capabilities:", "type": "select", "values": ["Auto Targeting & Auto Shooting", "Auto Targeting", "Auto Shooting", "None / No Limelight"] },
+    { "name": "Extra Cameras Used?", "type": "toggle" },
+    { "name": "Automation Via Sensors?", "type": "toggle" },
+
+    { "name": "What is your favorite or least favorite part of this year's game?", "type": "text", "tip": "Type here...", "group": "Other" },
+    { "name": "Are there any other unique abilities or quirks that your robot has that you’d like to talk about?", "type": "text", "tip": "Type here..." },
+  ]
 };
 
 const exampleTemplate = infiniteRechargeSurvey;
