@@ -68,14 +68,14 @@ const infiniteRechargeSurvey = {
 
     { "name": "Drive Train Type", "type": "text", "tip": "Enter type here...", "group": "Robot Specs" },
     { "name": "Motor Type", "type": "text", "tip": "Enter type here..." },
-    { "name": "Number of Wheels Used", "type": "number" },
     { "name": "Ability to move cones(1-10)", "type": "float"},
     { "name": "Ability to move balls (1-10)", "type": "float"},
-    { "name": "Goal Height", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
     { "name": "Average Cone cycle Time (s)", "type": "float"},
     { "name": "Average Ball cycle Time (s)", "type": "float"},
     { "name": "sucsessfull grab rate (%)", "type": "float"},
     { "name": "Robot Weight (lbs)", "type": "float"},
+    { "name": "Goal Height", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
+    { "name": "Total Wheels Used", "type": "number" },
 
     { "name": "endgame ability/stratagy sumary", "type": "text", "group": "Engineered Capabilities" },
     { "name": "endgame traction rating", "type":"rating"},
