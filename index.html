@@ -27,6 +27,9 @@
   <div class="flex hide" id="menu">
     <span class="group">Options</span>
     <div class="flex spaced">
+      <div class="flex">Event Passcode
+        <input id="auth-passwd" placeholder="The password to save data online">
+      </div>
       <div>Crew
         <select id="crew-select">
           <option class="red">Crew 1</option>
@@ -37,11 +40,9 @@
           <option class="blue">Crew 6</option>
         </select>
       </div>
-      
-      <div>Event Passcode
-        <input id="auth-passwd">
+      <div>Name
+        <input id="scout-name" placeholder="Your Own Name...">
       </div>
-
       <div>Template
         <div class="flex">
           <button id="template-copy-btn"><i class="copy text-icon"></i>Copy</button>
@@ -59,9 +60,6 @@
           <button id="surveys-download-btn"><i class="download text-icon"></i>Download</button>
           <button id="surveys-erase-btn"><i class="eraser text-icon"></i>Erase</button>
         </div>
-      </div>
-      <div>Name
-        <input id="scout-name" placeholder="Your Own Name...">
       </div>
     </div>
   </div>
