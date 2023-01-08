@@ -5,6 +5,8 @@ if ("serviceWorker" in navigator) {
 const menuToggleButton = document.querySelector("#menu-toggle-btn");
 const locationText = document.querySelector("#crew-text");
 const menuDiv = document.querySelector("#menu");
+const authPasswd = document.querySelector("#auth-passwd");
+const scoutName = document.querySelector("#scout-name");
 const locationSelect = document.querySelector("#crew-select");
 const templateCopyButton = document.querySelector("#template-copy-btn");
 const templateEditButton = document.querySelector("#template-edit-btn");
@@ -32,6 +34,8 @@ surveyResetButton.onclick = () => resetSurvey();
 let scoutLocation = "Crew 1";
 let isAbsent = false;
 let gameMetrics = [];
+
+let serverURL = "https://data.team4198.org:8000";
 
 // If you make a new type, be sure to add it here
 const metricTypes = {
@@ -94,24 +98,31 @@ loadTemplate(currentTemplate);
 setLocation(localStorage.location ?? "Crew 1");
 
 if (localStorage.backup) {
-  const backup = JSON.parse(localStorage.backup);
-  teamMetric.value = backup.find(metric => metric.name == "Team").value;
-  isAbsent = backup.find(metric => metric.name == "Absent").value;
-  if (isAbsent) {
-    absentMetric.innerHTML = "<i class='square-checked text-icon'></i>Absent";
-    customMetricsDiv.classList.toggle("hide");
-    refreshIcons(absentMetric);
+    const backup = JSON.parse(localStorage.backup);
+    authPasswd.value = backup.find(metric => metric.name == "Auth").value;
+    matchMetric.value = matchCount;
+    scoutName.value = backup.find(metric => metric.name == "tName").value;
+    isAbsent = backup.find(metric => metric.name == "Absent").value;
+    if (isAbsent) {
+      absentMetric.innerHTML = "<i class='square-checked text-icon'></i>Absent";
+      customMetricsDiv.classList.toggle("hide");
+      refreshIcons(absentMetric);
+    }
+    gameMetrics.forEach(metric => {
+      metric.update(backup.find(m => m.name == metric.name).value);
+    });
+    if (matchListings.length != 0) {
+      teamDisp.value = determineTeam(matchMetric.value, scoutLocation);
+    }
   }
-  gameMetrics.forEach(metric => {
-    metric.update(backup.find(m => m.name == metric.name).value);
-  });
-}
 
 /** Stores the current unsaved survey to `localStorage` */
 function backupSurvey() {
   localStorage.backup = JSON.stringify([
     { name: "Team", value: teamMetric.value },
     { name: "Absent", value: isAbsent },
+    { name: "Auth", value: authPasswd.value },
+    { name: "Name", value: scoutName.value},
     ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
   ]);
 }
@@ -223,35 +234,120 @@ function setLocation(newLocation = "Crew 1") {
 
 /** Validates and saves the current survey to `localStorage` */
 function saveSurvey() {
-  // Matches a 1-4 long sequence of numbers and an optional character
-  if (!/^\d{1,4}[A-Z]?$/.test(teamMetric.value)) {
-    alert("Invalid team value");
-    teamMetric.focus();
-    return;
-  }
-  if (currentTemplate.teams) {
-    if (!currentTemplate.teams.some(team => team == teamMetric.value)) {
-      alert("Invalid team value");
-      teamMetric.focus();
+    if (matchListings.length == 0) {
+      // Matches a 1-4 long sequence of numbers and an optional character
+      if (!/^\d{1,4}[A-Z]?$/.test(teamMetric.value)) {
+        alert("Invalid team value! Please enter a 1-9999 digit team number.");
+        teamMetric.focus();
+        return;
+      }
+      if (currentTemplate.teams) {
+        if (!currentTemplate.teams.some(team => team == teamMetric.value)) {
+          alert("Invalid team value! Please enter a 1-9999 digit team number.");
+          teamMetric.focus();
+          return;
+        }
+      }
+  
+      if (scoutName.value == "") {
+          alert("Invalid name value! Please enter your name where it goes.");
+          teamMetric.focus();
+          return;
+      }
+      
+    }
+    // Matches a 1-3 long sequence of numbers
+    if (!/\d{1,3}/.test(matchMetric.value)) {
+      alert("Invalid match value! Make sure the match value is an integer.");
+      matchMetric.focus();
       return;
     }
+    if (matchListings.length != 0) {
+      if (1 > matchMetric.value || matchMetric.value > matchListings.length) {
+        alert("Invalid match value! Make sure the match value is a valid qualifier match.");
+        matchMetric.focus();
+        return;
+      }
+    }
+    if (authPasswd.value == ""){
+      if (!confirm("Save match data OFFLINE?")) return;
+      let surveys = JSON.parse(localStorage.surveys ?? "[]");
+      surveys.push([
+        { name: "Team", value: teamMetric.value },
+        { name: "Absent", value: isAbsent },
+        { name: "Location", value: locationSelect.value },
+        { name: "Name", value: scoutName.value},
+        ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
+      ]);
+      localStorage.surveys = JSON.stringify(surveys);
+      resetSurvey(false);
+    }
+    else {
+      if (!confirm("Save match data online?")) return;
+      let surveys = JSON.parse(localStorage.surveys ?? "[]");
+      surveys.push([
+        { name: "Team", value: teamMetric.value },
+        { name: "Absent", value: isAbsent },
+        { name: "Location", value: locationSelect.value },
+        { name: "Name", value: scoutName.value},
+        ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
+      ]);
+      postSurvey([
+        { name: "Team", value: teamMetric.value },
+        { name: "Absent", value: isAbsent },
+        { name: "Location", value: locationSelect.value },
+        { name: "Name", value: scoutName.value},
+        ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
+      ]);
+    }
   }
-/*  // Matches a 1-3 long sequence of numbers
-  if (!/\d{1,3}/.test(matchMetric.value)) {
-    alert("Invalid match value");
-    matchMetric.focus();
-    return;
-  }*/
-  if (!confirm("Confirm save?")) return;
-  let surveys = JSON.parse(localStorage.surveys ?? "[]");
-  surveys.push([
-    { name: "Team", value: teamMetric.value },
-    { name: "Absent", value: isAbsent },
-    ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
-  ]);
-  localStorage.surveys = JSON.stringify(surveys);
-  resetSurvey(false);
-}
+
+function postSurvey(surveyJson){
+    newJson = "{\n";
+    surveyJson.forEach(metric => {
+      prettyName = metric.name.toLowerCase().split(/\(|\)|\ |\?/).join("").slice(0, 12);
+      if (typeof metric.value == "string") newJson += ('    "' + prettyName + '": "' + metric.value + '",\n');
+      else newJson += ('    "' + prettyName + '": ' + metric.value + ',\n');
+    });
+    newJson += '    "password": "' + authPasswd.value + '"\n}';
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", serverURL + "/vilescout");
+  
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+  
+    xhr.onload = function () {
+      console.log(xhr.status);
+  
+      if (xhr.status == 401){
+          console.log("Password Failed")
+        alert("Authentication failure. Please check password.");
+        authPasswd.focus();
+        return;
+      }
+  
+      // Process our return data
+      if (xhr.status >= 200 && xhr.status < 300) {
+          // Runs when the request is successful
+          console.log(xhr.responseText);
+      if (xhr.status == 202){
+        resetSurvey(false);
+      }
+      else if (xhr.status == 200) {
+          resetSurvey(false)
+      }
+      else{
+        alert("Unknown error occured. Please check your Internet connection.");
+        return;
+      }
+      } else {
+          // Runs when it's not
+          console.log(xhr.responseText);
+       }
+    };
+    xhr.send(newJson);
+
+  }
 
 /**
  * Resets the current survey
