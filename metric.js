@@ -260,3 +260,11 @@ class TimerMetric {
     this.stop();
   }
 }
+
+//intention is to make this force a new line in order for formating among all devices similar ill make it actually work soon
+class new_line {
+  constructor(metric={name:"new_line"}){
+    this.name = metric.name;
+    this.element.innerHTML = "<br>"
+  }
+}

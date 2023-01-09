@@ -46,6 +46,7 @@ const metricTypes = {
   "rating": RatingMetric,
   "timer": TimerMetric,
   "float": FloatMetric,
+  "new_line": new_line,
 };
 
 // The example template showcases each metric type
