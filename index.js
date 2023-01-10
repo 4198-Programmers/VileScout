@@ -85,8 +85,8 @@ const infiniteRechargeSurvey = {
 
     { "name": "Programmed Auto Capabilities?", "type": "text", "tip": "Type here. Leave blank for none.", "group": "Programmed Capabilities" },
     { "name": "Limelight Capabilities:", "type": "select", "values": ["Auto Targeting & Auto Shooting", "Auto Targeting", "Auto Shooting", "None / No Limelight"] },
-    { "name": "april tags used?", "type":"toggle"},
-    { "name": "reflective tape used?", "type":"toggle"},
+    { "name": "April tags used?", "type":"toggle"},
+    { "name": "Reflective tape used?", "type":"toggle"},
     { "name": "Extra Cameras Used?", "type": "toggle" },
     { "name": "Automation Via Sensors?", "type": "toggle" },
 
