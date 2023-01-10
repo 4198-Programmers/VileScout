@@ -73,7 +73,7 @@ const infiniteRechargeSurvey = {
     { "name": "Ability to move balls (1-10)", "type": "float"},
     { "name": "Average Cone cycle Time (s)", "type": "float"},
     { "name": "Average Ball cycle Time (s)", "type": "float"},
-    { "name": "sucsessfull grab rate (%)", "type": "float"},
+    { "name": "Successfull grab rate (%)", "type": "float"},
     { "name": "Robot Weight (lbs)", "type": "float"},
     { "name": "Goal Height", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
     { "name": "Total Wheels Used", "type": "number" },
