@@ -75,10 +75,10 @@ const infiniteRechargeSurvey = {
     { "name": "Average Cube cycle Time (s)", "type": "float"},
     { "name": "Successfull grab rate (%)", "type": "float"},
     { "name": "Robot Weight (lbs)", "type": "float"},
-    { "name": "Goal Height", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
+    { "name": "Height Capabilities", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
     { "name": "Total Wheels Used", "type": "number" },
 
-    { "name": "endgame ability/strategy sumary", "type": "text", "group": "Engineered Capabilities" },
+    { "name": "endgame ability/strategy sumary", "type": "text","tip":"Type here...", "group": "Engineered Capabilities" },
     { "name": "endgame traction rating", "type":"rating"},
     { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none." },
     { "name": "Where are 3D-Printed Parts Used?", "type": "text", "tip": "Type here. Leave blank for none." },
