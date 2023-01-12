@@ -69,8 +69,8 @@ const infiniteRechargeSurvey = {
 
     { "name": "Drive Train Type", "type": "text", "tip": "Enter type here...", "group": "Robot Specs" },
     { "name": "Motor Type", "type": "text", "tip": "Enter type here..." },
-    { "name": "Ability to move Cones(1-10)", "type": "float"},
-    { "name": "Ability to move Cubes (1-10)", "type": "float"},
+    { "name": "Ability to move Cones", "type": "rating"},
+    { "name": "Ability to move Cubes", "type": "rating"},
     { "name": "Average Cone cycle Time (s)", "type": "float"},
     { "name": "Average Cube cycle Time (s)", "type": "float"},
     { "name": "Successfull grab rate (%)", "type": "float"},

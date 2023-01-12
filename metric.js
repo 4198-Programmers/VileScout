@@ -85,10 +85,10 @@ class FloatMetric {
     this.element.append(this.input);
   }
 
-//   update(newValue = this.input.value.replace('"', "'")) {
-//     this.value = newValue;
-//     this.input.value = newValue;
-//   }
+  update(newValue = this.input.value.replace('"', "'")) {
+    this.value = newValue;
+    this.input.value = newValue;
+  }
 
   reset() {
     this.update("");
