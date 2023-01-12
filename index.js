@@ -69,10 +69,10 @@ const infiniteRechargeSurvey = {
 
     { "name": "Drive Train Type", "type": "text", "tip": "Enter type here...", "group": "Robot Specs" },
     { "name": "Motor Type", "type": "text", "tip": "Enter type here..." },
-    { "name": "Ability to move cones(1-10)", "type": "float"},
-    { "name": "Ability to move balls (1-10)", "type": "float"},
+    { "name": "Ability to move Cones(1-10)", "type": "float"},
+    { "name": "Ability to move Cubes (1-10)", "type": "float"},
     { "name": "Average Cone cycle Time (s)", "type": "float"},
-    { "name": "Average Ball cycle Time (s)", "type": "float"},
+    { "name": "Average Cube cycle Time (s)", "type": "float"},
     { "name": "Successfull grab rate (%)", "type": "float"},
     { "name": "Robot Weight (lbs)", "type": "float"},
     { "name": "Goal Height", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
@@ -95,6 +95,9 @@ const infiniteRechargeSurvey = {
   ]
 };
 
+// const matchMetric = [];
+const matchListings = [];
+
 const exampleTemplate = infiniteRechargeSurvey;
 
 let currentTemplate = JSON.parse(localStorage.template ?? JSON.stringify(exampleTemplate));
@@ -104,7 +107,7 @@ setLocation(localStorage.location ?? "Crew 1");
 if (localStorage.backup) {
     const backup = JSON.parse(localStorage.backup);
     authPasswd.value = backup.find(metric => metric.name == "Auth").value;
-    matchMetric.value = matchCount;
+    // matchMetric.value = matchCount;
     scoutName.value = backup.find(metric => metric.name == "tName").value;
     isAbsent = backup.find(metric => metric.name == "Absent").value;
     if (isAbsent) {
@@ -261,11 +264,11 @@ function saveSurvey() {
       
     }
     // Matches a 1-3 long sequence of numbers
-    if (!/\d{1,3}/.test(matchMetric.value)) {
-      alert("Invalid match value! Make sure the match value is an integer.");
-      matchMetric.focus();
-      return;
-    }
+    // if (!/\d{1,3}/.test(matchMetric.value)) {
+    //   alert("Invalid match value! Make sure the match value is an integer.");
+    //   matchMetric.focus();
+    //   return;
+    // }
     if (matchListings.length != 0) {
       if (1 > matchMetric.value || matchMetric.value > matchListings.length) {
         alert("Invalid match value! Make sure the match value is a valid qualifier match.");
@@ -309,13 +312,13 @@ function saveSurvey() {
 function postSurvey(surveyJson){
     newJson = "{\n";
     surveyJson.forEach(metric => {
-      prettyName = metric.name.toLowerCase().split(/\(|\)|\ |\?/).join("").slice(0, 12);
+      prettyName = metric.name.toLowerCase().split(/\(|\)|\ |\?|\\|\/|\-/).join("").slice(0, 15);
       if (typeof metric.value == "string") newJson += ('    "' + prettyName + '": "' + metric.value + '",\n');
       else newJson += ('    "' + prettyName + '": ' + metric.value + ',\n');
     });
     newJson += '    "password": "' + authPasswd.value + '"\n}';
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", serverURL + "/vilescout");
+    xhr.open("POST", serverURL + "/pits");
   
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
