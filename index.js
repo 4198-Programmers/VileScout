@@ -67,7 +67,7 @@ const infiniteRechargeSurvey = {
     { "name": "Team Location", "type": "text", "tip": "Enter town here..." },
     { "name": "Robot Name", "type": "text", "tip": "Enter name here..." },
 
-    { "name": "Drive Train Type", "type": "text", "tip": "Enter type here...", "group": "Robot Specs" },
+    { "name": "Drive Train Type", "type": "select", "values": ["Mechanum","Tank(traction)","Tank(omni)","tank(mixed)","swerve"], "group": "Robot Specs" },
     { "name": "Motor Type", "type": "text", "tip": "Enter type here..." },
     { "name": "Ability to move Cones", "type": "rating"},
     { "name": "Ability to move Cubes", "type": "rating"},
