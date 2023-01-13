@@ -78,9 +78,7 @@ const infiniteRechargeSurvey = {
     { "name": "Height Capabilities", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
     { "name": "Total Wheels Used", "type": "number" },
 
-    { "name": "endgame ability/strategy sumary", "type": "text","tip":"Type here...", "group": "Engineered Capabilities" },
-    { "name": "endgame traction rating", "type":"rating"},
-    { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none." },
+    { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none.","group": "Engineered Capabilities" },
     { "name": "Where are 3D-Printed Parts Used?", "type": "text", "tip": "Type here. Leave blank for none." },
 
     { "name": "Programmed Auto Capabilities?", "type": "text", "tip": "Type here. Leave blank for none.", "group": "Programmed Capabilities" },
@@ -89,6 +87,7 @@ const infiniteRechargeSurvey = {
     { "name": "Extra Cameras Used?", "type": "toggle" },
     { "name": "Automation Via Sensors?", "type": "toggle" },
 
+    { "name": "endgame ability/strategy sumary", "type": "text","tip":"Type here..."},
     { "name": "What is your favorite or least favorite part of this year's game?", "type": "text", "tip": "Type here...", "group": "Other" },
     { "name": "Are there any other unique abilities or quirks that your robot has that you’d like to talk about?", "type": "text", "tip": "Type here..." },
   ]
