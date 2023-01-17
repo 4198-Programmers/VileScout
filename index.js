@@ -87,8 +87,9 @@ const infiniteRechargeSurvey = {
     { "name": "Extra Cameras Used?", "type": "toggle" },
     { "name": "Automation Via Sensors?", "type": "toggle" },
 
-    { "name": "endgame ability/strategy sumary", "type": "text","tip":"Type here...", "group":"Other"},
+    { "name": "endgame ability/strategy summary", "type": "text","tip":"Type here...", "group":"Other"},
     { "name": "What is your favorite or least favorite part of this year's game?", "type": "text", "tip": "Type here..." },
+    { "name": "drive station summary", "type": "text", "tip": "Summarize the battle station"},
     { "name": "Are there any other unique abilities or quirks that your robot has that you’d like to talk about?", "type": "text", "tip": "Type here..." },
   ]
 };
