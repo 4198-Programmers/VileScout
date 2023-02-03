@@ -75,7 +75,7 @@ const infiniteRechargeSurvey = {
     { "name": "Average Cube cycle Time (s)", "type": "float"},
     { "name": "Successfull grab rate (%)", "type": "float"},
     { "name": "Robot Weight (lbs)", "type": "float"},
-    { "name": "Height Capabilities", "type": "select", "values": ["All", "High","Middle", "Low", "None"] },
+    { "name": "Max Height Capabilities", "type": "select", "values": ["High","Middle", "Low", "Non-scoring bot"] },
     { "name": "Total Wheels Used", "type": "number" },
 
     { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none.","group": "Engineered Capabilities" },
