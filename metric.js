@@ -86,7 +86,8 @@ class FloatMetric {
   }
 
   update(newValue = this.input.value.replace('"', "'")) {
-    this.value = newValue;
+    this.value = parseFloat(newValue);
+    if (this.value == NaN) {this.value = parseFloat(0)}
     this.input.value = newValue;
   }
 
