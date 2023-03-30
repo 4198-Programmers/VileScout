@@ -59,8 +59,9 @@ class NumberMetric {
   }
 
   update(newValue = this.number.value) {
-    this.value = newValue;
-    this.number.value = newValue;
+    this.value = parseInt(newValue);
+    if (this.value == NaN) {this.value = parseInt(0)}
+    this.number.value = parseInt(newValue);
   }
 
   reset() {
