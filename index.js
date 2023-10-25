@@ -35,7 +35,7 @@ let scoutLocation = "Crew 1";
 let isAbsent = false;
 let gameMetrics = [];
 
-let serverURL = "https://data.team4198.org:8000";
+let serverURL = "http://127.0.0.1:8000";
 
 // If you make a new type, be sure to add it here
 const metricTypes = {
@@ -262,12 +262,6 @@ function saveSurvey() {
       }
       
     }
-    // Matches a 1-3 long sequence of numbers
-    // if (!/\d{1,3}/.test(matchMetric.value)) {
-    //   alert("Invalid match value! Make sure the match value is an integer.");
-    //   matchMetric.focus();
-    //   return;
-    // }
     if (matchListings.length != 0) {
       if (1 > matchMetric.value || matchMetric.value > matchListings.length) {
         alert("Invalid match value! Make sure the match value is a valid qualifier match.");
@@ -283,7 +277,7 @@ function saveSurvey() {
         { name: "Absent", value: isAbsent },
         { name: "Location", value: locationSelect.value },
         { name: "Name", value: scoutName.value},
-        ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
+        ...gameMetrics.map(metric => { return { name: metric.name, value: JSON.stringify(metric.value) } })
       ]);
       localStorage.surveys = JSON.stringify(surveys);
       resetSurvey(false);
@@ -299,28 +293,31 @@ function saveSurvey() {
         ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
       ]);
       postSurvey([
-        { name: "Team", value: teamMetric.value },
-        { name: "Absent", value: isAbsent },
-        { name: "Location", value: locationSelect.value },
-        { name: "Name", value: scoutName.value},
-        ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value } })
+        { name: "Team", value: teamMetric.value, category: "1Important" },
+        { name: "Absent", value: isAbsent, category: "2Important" },
+        { name: "Location", value: locationSelect.value, category: "2Important" },
+        { name: "Name", value: scoutName.value, category: "1Important"},
+        ...gameMetrics.map(metric => { return { name: metric.name, value: metric.value, category: metric.category } })
       ]);
     }
   }
-
-function postSurvey(surveyJson){
-    newJson = "{\n";
-    surveyJson.forEach(metric => {
-      prettyName = metric.name.toLowerCase().split(/\(|\)|\ |\?|\\|\/|\-/).join("").slice(0, 15);
-      if (typeof metric.value == "string") newJson += ('    "' + prettyName + '": "' + metric.value + '",\n');
-      else newJson += ('    "' + prettyName + '": ' + metric.value + ',\n');
-    });
-    newJson += '    "password": "' + authPasswd.value + '"\n}';
+  function postSurvey(surveyJson){
+    newJson = '{\n"data": {\n';
+    JSON.stringify(surveyJson.forEach(metric => {
+      prettyName = metric.name;
+      if (typeof metric.value == "string") newJson += (`    "${prettyName}": { "content": "${metric.value}", "category": "${metric.category}" },\n`);
+      else newJson += (`    "${prettyName}": { "content": "${JSON.stringify(metric.value)}", "category": "${metric.category}" },\n`);
+    }));
+    // remove last comma
+    newJson = newJson.slice(0, -2);
+    newJson += '\n}\n}';
+  
     let xhr = new XMLHttpRequest();
     xhr.open("POST", serverURL + "/pits");
   
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("x-pass-key", authPasswd.value);
   
     xhr.onload = function () {
       console.log(xhr.status);
@@ -352,7 +349,9 @@ function postSurvey(surveyJson){
        }
     };
     xhr.send(newJson);
-
+  
+  
+    
   }
 
 /**
