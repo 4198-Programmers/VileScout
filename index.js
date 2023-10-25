@@ -46,7 +46,6 @@ const metricTypes = {
   "rating": RatingMetric,
   "timer": TimerMetric,
   "float": FloatMetric,
-  "new_line": new_line,
 };
 
 // The example template showcases each metric type
@@ -63,34 +62,34 @@ const metricTypes = {
 
 const infiniteRechargeSurvey = {
   "metrics": [
-    { "name": "Full Team Name", "type": "text", "tip": "Enter team name here...", "group": "Team Information" },
-    { "name": "Team Location", "type": "text", "tip": "Enter town here..." },
-    { "name": "Robot Name", "type": "text", "tip": "Enter name here..." },
+    { "name": "Full Team Name", "type": "text", "tip": "Enter team name here...", "group": "Team Information", "category": "3VeryImportant", },
+    { "name": "Team Location", "type": "text", "tip": "Enter town here...", "category": "3VeryImportant", },
+    { "name": "Robot Name", "type": "text", "tip": "Enter name here...", "category": "3VeryImportant", },
 
-    { "name": "Drive Train Type", "type": "select", "values": ["Mechanum","Tank(traction)","Tank(omni)","Tank(mixed)","Swerve"], "group": "Robot Specs" },
-    { "name": "Motor Type", "type": "text", "tip": "Enter type here..." },
-    { "name": "Ability to move Cones", "type": "rating"},
-    { "name": "Ability to move Cubes", "type": "rating"},
-    { "name": "Average Cone cycle Time (s)", "type": "float"},
-    { "name": "Average Cube cycle Time (s)", "type": "float"},
-    { "name": "Successfull grab rate (%)", "type": "float"},
-    { "name": "Robot Weight (lbs)", "type": "float"},
-    { "name": "Max Height Capabilities", "type": "select", "values": ["High","Middle", "Low", "Non-scoring bot"] },
-    { "name": "Total Wheels Used", "type": "number" },
+    { "name": "Drive Train Type", "type": "select", "values": ["Mechanum","Tank(traction)","Tank(omni)","Tank(mixed)","Swerve"], "group": "Robot Specs", "category": "Robot Specs", },
+    { "name": "Motor Type", "type": "text", "tip": "Enter type here...", "category": "Robot Specs" },
+    { "name": "Ability to move Cones", "type": "rating", "category": "Robot Specs"},
+    { "name": "Ability to move Cubes", "type": "rating", "category": "Robot Specs"},
+    { "name": "Average Cone cycle Time (s)", "type": "float", "category": "Robot Specs"},
+    { "name": "Average Cube cycle Time (s)", "type": "float", "category": "Robot Specs"},
+    { "name": "Successfull grab rate (%)", "type": "float", "category": "Robot Specs"},
+    { "name": "Robot Weight (lbs)", "type": "float", "category": "Robot Specs"},
+    { "name": "Max Height Capabilities", "type": "select", "values": ["High","Middle", "Low", "Non-scoring bot"], "category": "Robot Specs" },
+    { "name": "Total Wheels Used", "type": "number", "category": "Robot Specs" },
 
-    { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none.","group": "Engineered Capabilities" },
-    { "name": "Where are 3D-Printed Parts Used?", "type": "text", "tip": "Type here. Leave blank for none." },
+    { "name": "Where are Pneumatics Used?", "type": "text", "tip": "Type here. Leave blank for none.","group": "Engineered Capabilities", "category": "Engineered Capabilities" },
+    { "name": "Where are 3D-Printed Parts Used?", "type": "text", "tip": "Type here. Leave blank for none.", "category": "Engineered Capabilities" },
 
-    { "name": "Programmed Auto Capabilities?", "type": "text", "tip": "Type here. Leave blank for none.", "group": "Programmed Capabilities" },
-    { "name": "April tags used?", "type":"toggle"},
-    { "name": "Reflective tape used?", "type":"toggle"},
-    { "name": "Extra Cameras Used?", "type": "toggle" },
-    { "name": "Automation Via Sensors?", "type": "toggle" },
+    { "name": "Programmed Auto Capabilities?", "type": "text", "tip": "Type here. Leave blank for none.", "group": "Programmed Capabilities", "category": "Programmed Capabilities" },
+    { "name": "April tags used?", "type":"toggle", "category": "Programmed Capabilities"},
+    { "name": "Reflective tape used?", "type":"toggle", "category": "Programmed Capabilities"},
+    { "name": "Extra Cameras Used?", "type": "toggle", "category": "Programmed Capabilities" },
+    { "name": "Automation Via Sensors?", "type": "toggle", "category": "Programmed Capabilities" },
 
-    { "name": "Endgame Ability/Strategy Summary", "type": "text","tip":"Type here...", "group":"Other"},
-    { "name": "What is your favorite or least favorite part of this year's game?", "type": "text", "tip": "Type here..." },
-    { "name": "Drive station summary", "type": "text", "tip": "Summarize the battle station"},
-    { "name": "Are there any other unique abilities or quirks that your robot has that you’d like to talk about?", "type": "text", "tip": "Type here..." },
+    { "name": "Endgame Ability/Strategy Summary", "type": "text","tip":"Type here...", "group":"Other", "category": "Other"},
+    { "name": "What is your favorite or least favorite part of this year's game?", "type": "text", "tip": "Type here...", "category": "Other" },
+    { "name": "Drive station summary", "type": "text", "tip": "Summarize the battle station", "category": "Other"},
+    { "name": "Are there any other unique abilities or quirks that your robot has that you’d like to talk about?", "type": "text", "tip": "Type here...", "category": "Other" },
   ]
 };
 
