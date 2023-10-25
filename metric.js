@@ -59,8 +59,9 @@ class NumberMetric {
   }
 
   update(newValue = this.number.value) {
-    this.value = newValue;
-    this.number.value = newValue;
+    this.value = parseInt(newValue);
+    if (this.value == NaN) {this.value = parseInt(0)}
+    this.number.value = parseInt(newValue);
   }
 
   reset() {
@@ -86,7 +87,8 @@ class FloatMetric {
   }
 
   update(newValue = this.input.value.replace('"', "'")) {
-    this.value = newValue;
+    this.value = parseFloat(newValue);
+    if (this.value == NaN) {this.value = parseFloat(0)}
     this.input.value = newValue;
   }
 
@@ -258,5 +260,13 @@ class TimerMetric {
   reset() {
     this.update(0);
     this.stop();
+  }
+}
+
+//intention is to make this force a new line in order for formating among all devices similar ill make it actually work soon
+class new_line {
+  constructor(metric={name:"new_line"}){
+    this.name = metric.name;
+    this.element.innerHTML = "<br>"
   }
 }
