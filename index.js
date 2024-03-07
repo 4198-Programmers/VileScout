@@ -71,7 +71,7 @@ const survey = {
     { "name": "Drive Train Type", "type": "select", "values": ["Mechanum","Tank(traction)","Tank(omni)","Tank(mixed)","Swerve"], "group": "Robot Specs", "category": "robotspecs", "identifier": "drivetrain" },
     { "name": "Motor Type", "type": "text", "tip": "Enter type here..." , "category": "robotspecs", "identifier": "motortype"},
     { "name": "Can climb?", "type": "toggle", "category": "robotspecs", "identifier": "canclimb" },
-    { "name": "Can do amp or speaker?", "type": "select", "values": ["Amp", "Speaker", "Both"], "category": "robotspecs", "identifier": "amporspeaker" },
+    { "name": "Can do amp or speaker?", "type": "select", "values": ["Neither", "Amp", "Speaker", "Both"], "category": "robotspecs", "identifier": "amporspeaker" },
     { "name": "Can do trap?", "type": "toggle", "category": "robotspecs", "identifier": "cantrap" },
 
     { "name": "Robot Weight (lbs)", "type": "number", "category": "robotspecs", "identifier": "robotweightlbs" },
