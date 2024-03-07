@@ -165,10 +165,11 @@ function surveyToJson(surveyJson) {
     };
 
     surveyJson.forEach(metric => {
+        let identifier = metric.identifier ? metric.identifier : metric.name.toLowerCase().replace(/ /g, "");
         if (!formattedJson[metric.category]) {
                 formattedJson[metric.category] = {};
         }
-        formattedJson[metric.category][metric.identifier] = metric.value;
+        formattedJson[metric.category][identifier] = metric.value;
     });
 
     return JSON.stringify(formattedJson, null, 2);
