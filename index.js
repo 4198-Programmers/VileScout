@@ -165,7 +165,6 @@ function surveyToJson(surveyJson) {
     };
 
     surveyJson.forEach(metric => {
-        console.log(metric);
         if (!formattedJson[metric.category]) {
                 formattedJson[metric.category] = {};
         }
@@ -325,7 +324,6 @@ function saveSurvey() {
         if (!confirm("Save match data OFFLINE?")) return;
         let surveys = JSON.parse(localStorage.surveys ?? "[]");
         surveys.push(surveyData());
-        console.log(surveyToJson(surveyData()))
         localStorage.surveys = JSON.stringify(surveys);
         resetSurvey(false);
     }
@@ -365,7 +363,6 @@ function downloadSurveys(askUser = true) {
     switch (downloadSelect.value) {
         case "JSON":
             surveyJson = JSON.parse(localStorage.surveys);
-            console.log(surveyJson);
             if (surveyJson.length == 1) {
                 newJson = surveyToJson(surveyJson[0]);
             } else {
@@ -377,7 +374,6 @@ function downloadSurveys(askUser = true) {
             }
 
             anchor.href += encodeURIComponent(newJson);
-            console.log(newJson);
             anchor.download = fileName + ".json";
 
             break;
