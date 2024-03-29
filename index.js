@@ -82,7 +82,6 @@ const survey = {
 
     { "name": "Programmed Auto Capabilities?", "type": "text", "tip": "Type here. Leave blank for none.", "group": "Programmed Capabilities", "category": "programcapabilities", "identifier": "autocapabilities" },
     { "name": "April tags used?", "type":"toggle", "category": "programcapabilities", "identifier": "useapriltags" },
-    { "name": "Reflective tape used?", "type":"toggle", "category": "programcapabilities", "identifier": "usereflecttape" },
     { "name": "Extra Cameras Used?", "type": "toggle", "category": "programcapabilities", "identifier": "useextracameras" },
     { "name": "Automation Via Sensors?", "type": "toggle", "category": "programcapabilities", "identifier": "usesensorautomation" },
 
